@@ -1,0 +1,49 @@
+name: login_signup
+description: A new Flutter project.
+
+publish_to: 'none' # Prevents accidental publishing to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Cupertino Icons for iOS style icons
+  cupertino_icons: ^1.0.2
+  icons_plus: ^4.0.0  # Adding icons_plus for additional icons
+
+  # Add the translator package for translation functionality
+  translator: ^0.1.7
+  firebase_core: ^3.3.0
+  firebase_auth: ^5.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0  # Recommended linting rules for Flutter projects
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/courses.png
+    - assets/images/assessments.png
+    - assets/images/games.png
+    - assets/images/bg1.png  # Background image
+    - assets/images/fr_flag.png  # French flag
+    - assets/images/en_flag.png  # English flag
+    - assets/images/  # Includes all images in the directory
+ # Including all images in the assets/images/ directory
+
+  # If custom fonts are used, they would be added here
+  # Example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
