@@ -10,14 +10,14 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('English mastery'),
+      appBar: AppBar(title: const Text('Interactive English Mastery'),
         actions:  [
           PopupMenuButton<Menuaction>(
               onSelected: (value) async {
                 switch (value){
                   case Menuaction.logout:
-                    final ShouldOut = await ShowlogOutDialog(context);
-                    if(ShouldOut){
+                    final shouldOut = await ShowlogOutDialog(context);
+                    if(shouldOut){
                       await FirebaseAuth.instance.signOut();
                       Navigator.push(
                         context,

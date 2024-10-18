@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_scaffold.dart';
+import 'translate_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -43,29 +44,50 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                DashboardCard(
-                  imagePath: 'assets/images/courses.png',
-                  title: 'Courses',
-                  onTap: () {
-                    // Navigate to courses screen
-                  },
-                ),
-                DashboardCard(
-                  imagePath: 'assets/images/assessments.png',
-                  title: 'Assessments',
-                  onTap: () {
-                    // Navigate to assessments screen
-                  },
-                ),
-                DashboardCard(
-                  imagePath: 'assets/images/games.png',
-                  title: 'Games',
-                  onTap: () {
-                    // Navigate to games screen
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    DashboardCard(
+                      imagePath: 'assets/images/courses.png',
+                      title: 'Courses',
+                      onTap: () {
+                        // Navigate to courses screen
+                      },
+                    ),SizedBox(width: 60),
+                    DashboardCard(
+                      imagePath: 'assets/images/assessments.png',
+                      title: 'Assessments',
+                      onTap: () {
+                        // Navigate to assessments screen
+                      },
+                    ),
+                  ],
+                ),SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DashboardCard(
+                      imagePath: 'assets/images/games.png',
+                      title: 'Games',
+                      onTap: () {
+                        // Navigate to games screen
+                      },
+                    ),SizedBox(width: 60),
+                    DashboardCard(
+                      imagePath: 'assets/images/trans_image.png',
+                      title: 'Translator',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LanguageTranslatingPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -79,7 +101,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            ProgressCard(
+            const ProgressCard(
               percentage: 0,
               level: 'Beginner',
               locked: false,
@@ -110,10 +132,10 @@ class DashboardCard extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            radius: 40,
+            radius: 50,
             backgroundImage: AssetImage(imagePath),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 7),
           Text(
             title,
             style: const TextStyle(
@@ -148,7 +170,7 @@ class ProgressCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            image: DecorationImage(
+            image: const DecorationImage(
               image: AssetImage('assets/images/progress_bg.png'),
               fit: BoxFit.cover,
             ),
