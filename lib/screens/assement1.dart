@@ -154,13 +154,13 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
               ),
               ElevatedButton(
                 onPressed: onStart,
-                child: const Text('START'),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.purple, backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                child: const Text('START'),
               ),
             ],
           ),

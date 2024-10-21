@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_scaffold.dart';
+import 'grammer_scrren.dart';
 import 'translate_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -55,16 +56,21 @@ class DashboardScreen extends StatelessWidget {
                       onTap: () {
                         // Navigate to courses screen
                       },
-                    ),SizedBox(width: 60),
+                    ),const SizedBox(width: 60),
                     DashboardCard(
                       imagePath: 'assets/images/assessments.png',
                       title: 'Assessments',
                       onTap: () {
-                        // Navigate to assessments screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GrammarHomePage(),
+                          ),
+                        );
                       },
                     ),
                   ],
-                ),SizedBox(height: 20),
+                ),const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -74,7 +80,7 @@ class DashboardScreen extends StatelessWidget {
                       onTap: () {
                         // Navigate to games screen
                       },
-                    ),SizedBox(width: 60),
+                    ),const SizedBox(width: 60),
                     DashboardCard(
                       imagePath: 'assets/images/trans_image.png',
                       title: 'Translator',

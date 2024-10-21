@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class TestPage extends StatefulWidget {
+  const TestPage({super.key});
+
   @override
   _TestPageState createState() => _TestPageState();
 }
@@ -73,8 +75,8 @@ class _TestPageState extends State<TestPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test Your Knowledge'),
-        backgroundColor: Color(0xFF1F2C46),
+        title: const Text('Test Your Knowledge'),
+        backgroundColor: const Color(0xFF1F2C46),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -85,37 +87,37 @@ class _TestPageState extends State<TestPage> {
             if (!testCompleted)
               Text(
                 'Question ${currentQuestion + 1}/${questions.length}',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
               ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Enhanced Question Card
             _buildQuestionCard(),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Enhanced Answer Options
             if (!testCompleted) ..._buildOptionsList(),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Show Results and Review Button if Test is Completed
             if (testCompleted) _buildResults(),
           ],
         ),
       ),
-      backgroundColor: Color(0xFF1F2C46),
+      backgroundColor: const Color(0xFF1F2C46),
     );
   }
 
   Widget _buildQuestionCard() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.orange, // Orange question bar
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             offset: Offset(0, 2),
@@ -125,7 +127,7 @@ class _TestPageState extends State<TestPage> {
       ),
       child: Text(
         !testCompleted ? questions[currentQuestion]['question'] as String : 'Test Completed!',
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         textAlign: TextAlign.center,
       ),
     );
@@ -156,13 +158,13 @@ class _TestPageState extends State<TestPage> {
         },
         child: Container(
           width: double.infinity,
-          margin: EdgeInsets.symmetric(vertical: 8),
-          padding: EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: selectedAnswers[currentQuestion] == option ? Colors.green : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 4,
@@ -195,38 +197,38 @@ class _TestPageState extends State<TestPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
-              Text('Results', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
+              const Text('Results', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+              const SizedBox(height: 10),
               PieChart(
                 dataMap: {
                   "Correct": percentageCorrect,
                   "Incorrect": percentageIncorrect,
                 },
                 chartType: ChartType.ring,
-                colorList: [Colors.green, Colors.red],
-                animationDuration: Duration(milliseconds: 800),
+                colorList: const [Colors.green, Colors.red],
+                animationDuration: const Duration(milliseconds: 800),
                 chartLegendSpacing: 32,
                 chartRadius: MediaQuery.of(context).size.width / 3.2,
-                centerText: "${correctAnswers}/${questions.length}",
+                centerText: "$correctAnswers/${questions.length}",
                 ringStrokeWidth: 32,
-                legendOptions: LegendOptions(
+                legendOptions: const LegendOptions(
                   legendPosition: LegendPosition.right,
                   showLegendsInRow: false,
                   legendTextStyle: TextStyle(fontSize: 15, color: Colors.white),
                 ),
-                chartValuesOptions: ChartValuesOptions(
+                chartValuesOptions: const ChartValuesOptions(
                   showChartValues: true,
                   showChartValuesOutside: true,
                   decimalPlaces: 1,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'You answered $correctAnswers out of ${questions.length} correctly!',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
@@ -235,32 +237,32 @@ class _TestPageState extends State<TestPage> {
                     showReview = !showReview;
                   });
                 },
-                child: Text(showReview ? 'Hide Review' : 'Review Questions'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Adjust button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+                child: Text(showReview ? 'Hide Review' : 'Review Questions'),
               ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               if (showReview)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Review the Questions:',
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     // List of Questions with Correct Answers
                     ..._buildReviewQuestions(),
                   ],
                 ),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
@@ -274,13 +276,13 @@ class _TestPageState extends State<TestPage> {
                     showReview = false; // Hide review on retry
                   });
                 },
-                child: Text('RETRY'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Adjust button color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+                child: const Text('RETRY'),
               ),
             ],
           ),
@@ -298,12 +300,12 @@ class _TestPageState extends State<TestPage> {
 
       return Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(vertical: 8),
-        padding: EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black12,
               blurRadius: 4,
@@ -316,16 +318,16 @@ class _TestPageState extends State<TestPage> {
           children: [
             Text(
               'Q: $question',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               'Your Answer: ${selectedAnswer ?? "Not Answered"}',
               style: TextStyle(fontSize: 14, color: selectedAnswer == correctAnswer ? Colors.green : Colors.red),
             ),
             Text(
               'Correct Answer: $correctAnswer',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green),
             ),
           ],
         ),

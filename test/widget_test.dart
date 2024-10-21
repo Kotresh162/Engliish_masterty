@@ -5,7 +5,7 @@ import 'package:login_signup/main.dart'; // Replace with your actual app's name 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp()); // Remove 'const' if MyApp is not a const widget
+    await tester.pumpWidget(const MyApp()); // Remove 'const' if MyApp is not a const widget
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

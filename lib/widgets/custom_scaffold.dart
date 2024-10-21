@@ -10,7 +10,9 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Interactive English Mastery'),
+      appBar: AppBar(title: const Text('Interactive English Mastery',style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF0D1B2A),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions:  [
           PopupMenuButton<Menuaction>(
               onSelected: (value) async {
@@ -38,6 +40,7 @@ class CustomScaffold extends StatelessWidget {
               }
           )
         ],),
+      drawer: const Drawer(),
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [

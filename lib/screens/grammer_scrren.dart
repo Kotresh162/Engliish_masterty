@@ -1,45 +1,9 @@
 import 'package:flutter/material.dart';
 import 'test_page.dart'; // Import the Test Page
 
-void main() {
-  runApp(EnglishGrammarApp());
-}
-
-class EnglishGrammarApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.dark, // Dark theme
-        primaryColor: Colors.blue, // Primary color for buttons, etc.
-        scaffoldBackgroundColor: Color(0xFF0D1B2A), // Dark blue background
-        textTheme: TextTheme(
-          bodyLarge: TextStyle(color: Colors.white), // White text
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFF1B263B), // Slightly lighter blue for input fields
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          hintStyle: TextStyle(color: Colors.white70), // Placeholder text color
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white, backgroundColor: Color(0xFF007BFF), // Button text color
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
-            ),
-          ),
-        ),
-      ),
-      home: GrammarHomePage(),
-    );
-  }
-}
-
 class GrammarHomePage extends StatefulWidget {
+  const GrammarHomePage({super.key});
+
   @override
   _GrammarHomePageState createState() => _GrammarHomePageState();
 }
@@ -51,11 +15,11 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('English Grammar', style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF0D1B2A),
-        iconTheme: IconThemeData(color: Colors.white),
+        title: const Text('English Grammar', style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xFF0D1B2A),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      drawer: Drawer(),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -76,7 +40,7 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
                 }),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Conditional content based on the selected tab
             showMixedTopicsTest ? _buildMixedTopicsTestContent() : _buildTopicContent(),
           ],
@@ -90,19 +54,19 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFF007BFF) : Color(0xFF1B263B),
+          color: isSelected ? const Color(0xFF007BFF) : const Color(0xFF1B263B),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: Color(0xFF007BFF),
+            color: const Color(0xFF007BFF),
             width: 2,
           ),
         ),
         child: Text(
           title,
           style: TextStyle(
-            color: isSelected ? Colors.white : Color(0xFF007BFF),
+            color: isSelected ? Colors.white : const Color(0xFF007BFF),
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -116,16 +80,16 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
     return Expanded(
       child: ListView(
         children: [
-          _buildTestCard('CUSTOM TEST', Color(0xFF007BFF), Color(0xFF1B263B), () {
+          _buildTestCard('CUSTOM TEST', const Color(0xFF007BFF), const Color(0xFF1B263B), () {
             // Navigate to Custom Test
           }),
-          _buildTestCard('BEGINNER TEST', Color(0xFFFFA500), Color(0xFFFF6347), () {
+          _buildTestCard('BEGINNER TEST', const Color(0xFFFFA500), const Color(0xFFFF6347), () {
             // Navigate to Beginner Test
           }),
-          _buildTestCard('MEDIUM TEST', Color(0xFF32CD32), Color(0xFFFFFF00), () {
+          _buildTestCard('MEDIUM TEST', const Color(0xFF32CD32), const Color(0xFFFFFF00), () {
             // Navigate to Medium Test
           }),
-          _buildTestCard('ADVANCED TEST', Color(0xFF007BFF), Color(0xFF1B263B), () {
+          _buildTestCard('ADVANCED TEST', const Color(0xFF007BFF), const Color(0xFF1B263B), () {
             // Navigate to Advanced Test
           }),
         ],
@@ -153,7 +117,7 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
     return GestureDetector(
       onTap: onStart,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -169,7 +133,7 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -177,14 +141,14 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
               ),
               ElevatedButton(
                 onPressed: onStart,
-                child: Text('START'),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Color(0xFF1B263B),
+                  foregroundColor: const Color(0xFF1B263B),
                   backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+                child: const Text('START'),
               ),
             ],
           ),
@@ -198,7 +162,8 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      color: const Color(0xFF1B263B),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -206,13 +171,13 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -221,7 +186,7 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
                     // Navigate to Test Page when "Test" button is pressed
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TestPage()),
+                      MaterialPageRoute(builder: (context) => const TestPage()),
                     );
                   },
                   child: Text(testLabel.toUpperCase()),
@@ -230,8 +195,7 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
             ),
           ],
         ),
-      ),
-      color: Color(0xFF1B263B), // Match the card background to the theme
+      ), // Match the card background to the theme
     );
   }
 }
