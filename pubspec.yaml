@@ -23,6 +23,7 @@ dependencies:
   flutter_tts: ^3.5.0
   firebase_storage: ^12.3.1
   pie_chart: ^5.4.0
+  youtube_player_flutter: 9.0.1
 
 dev_dependencies:
   flutter_test:

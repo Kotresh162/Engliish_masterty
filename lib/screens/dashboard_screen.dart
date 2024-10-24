@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_scaffold.dart';
-import 'grammer_scrren.dart';
+import 'courses/courses_screen.dart';
+import 'assesment/grammer_scrren.dart';
 import 'translate_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -8,111 +9,127 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Learning at your finger tips.",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Discover Language Resources...',
-                prefixIcon: const Icon(Icons.search, color: Colors.black),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              "Dashboard",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Column(
+    return GestureDetector(
+      onTap: () {
+        // Unfocus the text field when tapping outside
+        FocusScope.of(context).unfocus();
+      },
+      child: CustomScaffold(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    DashboardCard(
-                      imagePath: 'assets/images/courses.png',
-                      title: 'Courses',
-                      onTap: () {
-                        // Navigate to courses screen
-                      },
-                    ),const SizedBox(width: 60),
-                    DashboardCard(
-                      imagePath: 'assets/images/assessments.png',
-                      title: 'Assessments',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => GrammarHomePage(),
-                          ),
-                        );
-                      },
+                const Text(
+                  "Learning at your finger tips.",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Discover Language Resources...',
+                    prefixIcon: const Icon(Icons.search, color: Colors.black),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
                     ),
-                  ],
-                ),const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Dashboard",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Column(
                   children: [
-                    DashboardCard(
-                      imagePath: 'assets/images/games.png',
-                      title: 'Games',
-                      onTap: () {
-                        // Navigate to games screen
-                      },
-                    ),const SizedBox(width: 60),
-                    DashboardCard(
-                      imagePath: 'assets/images/trans_image.png',
-                      title: 'Translator',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LanguageTranslatingPage(),
-                          ),
-                        );
-                      },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        DashboardCard(
+                          imagePath: 'assets/images/courses.png',
+                          title: 'Courses',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GraphicDesignScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 60),
+                        DashboardCard(
+                          imagePath: 'assets/images/assessments.png',
+                          title: 'Assessments',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GrammarHomePage(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DashboardCard(
+                          imagePath: 'assets/images/games.png',
+                          title: 'Games',
+                          onTap: () {
+                            // Navigate to games screen
+                          },
+                        ),
+                        const SizedBox(width: 60),
+                        DashboardCard(
+                          imagePath: 'assets/images/trans_image.png',
+                          title: 'Translator',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LanguageTranslatingPage(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ],
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Progress",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const ProgressCard(
+                  percentage: 0,
+                  level: 'Beginner',
+                  locked: false,
                 ),
               ],
             ),
-            const SizedBox(height: 30),
-            const Text(
-              "Progress",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const ProgressCard(
-              percentage: 0,
-              level: 'Beginner',
-              locked: false,
-            ),
-          ],
+          ),
         ),
       ),
     );

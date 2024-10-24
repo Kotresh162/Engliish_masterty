@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../screens/signin_screen.dart';
+import '../screens/registry/signin_screen.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget child;
