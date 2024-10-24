@@ -50,43 +50,43 @@ class GraphicDesignScreen extends StatelessWidget {
         children: [
           _buildCourseCard(
             context: context,
-            imageUrl: 'https://via.placeholder.com/150',
+            youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // YouTube URL
             title: 'Advance Diploma in Graphic Design',
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => VideoScreen(),
+                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
                 ),
               );
             },
             rating: 5.0,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 10),
           _buildCourseCard(
             context: context,
-            imageUrl: 'https://via.placeholder.com/150',
+            youtubeUrl: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ', // YouTube URL
             title: 'Certificate in Graphic Design',
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => VideoScreen(),
+                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
                 ),
               );
             },
             rating: 5.0,
           ),
-          SizedBox(width: 16),
+          SizedBox(width: 10),
           _buildCourseCard(
             context: context,
-            imageUrl: 'https://via.placeholder.com/150',
+            youtubeUrl: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g', // YouTube URL
             title: 'Certificate in Graphic Design',
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => VideoScreen(),
+                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
                 ),
               );
             },
@@ -96,6 +96,7 @@ class GraphicDesignScreen extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildAllCourses(BuildContext context) {
     return Column(
@@ -141,11 +142,21 @@ class GraphicDesignScreen extends StatelessWidget {
 
   Widget _buildCourseCard({
     required BuildContext context,
-    required String imageUrl,
+    required String youtubeUrl, // Add the YouTube URL
     required String title,
     required double rating,
     required VoidCallback onTap,
   }) {
+    // Function to extract the YouTube thumbnail URL from the YouTube link
+    String getYoutubeThumbnail(String youtubeUrl) {
+      // Extract the video ID from the YouTube URL
+      final Uri uri = Uri.parse(youtubeUrl);
+      String videoId = uri.queryParameters['v'] ?? uri.pathSegments.last;
+
+      // Return the thumbnail URL
+      return 'https://img.youtube.com/vi/$videoId/0.jpg';
+    }
+
     return GestureDetector(
       onTap: onTap, // Ensure onTap is connected
       child: Container(
@@ -163,7 +174,7 @@ class GraphicDesignScreen extends StatelessWidget {
                   top: Radius.circular(15),
                 ),
                 child: Image.network(
-                  imageUrl,
+                  getYoutubeThumbnail(youtubeUrl),
                   height: 120,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -198,6 +209,7 @@ class GraphicDesignScreen extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildCourseItem({
     required BuildContext context,

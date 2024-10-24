@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-
 class VideoScreen extends StatefulWidget {
+  final String youtubeUrl; // Accept the YouTube URL as a parameter
+
+  const VideoScreen({required this.youtubeUrl, Key? key}) : super(key: key); // Add required parameter in constructor
+
   @override
   _VideoScreenState createState() => _VideoScreenState();
 }
@@ -13,9 +16,10 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   void initState() {
     super.initState();
-    const videoUrl = 'https://youtu.be/YMx8Bbev6T4?si=HiLBp25uLK5ICFVn';
+
+    // Convert the provided YouTube URL to a video ID
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.youtubeUrl)!,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,

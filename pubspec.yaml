@@ -24,8 +24,13 @@ dependencies:
   firebase_storage: ^12.3.1
   pie_chart: ^5.4.0
   youtube_player_flutter: 9.0.1
+  cloud_firestore: ^5.4.4
+  get: ^4.6.6
+  json_annotation: ^4.9.0
 
 dev_dependencies:
+  json_serializable: ^6.8.0
+  build_runner: ^2.4.11
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0  # Recommended linting rules for Flutter projects
