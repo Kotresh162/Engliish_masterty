@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -142,13 +143,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       final email = _emailController.text;
                                       final password = _passwordController.text;
 
-                                      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                                      // Create user with Firebase Auth
+                                      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
                                         email: email,
                                         password: password,
                                       );
-                                      final user = FirebaseAuth.instance.currentUser;
-                                      user?.sendEmailVerification();
-                                      // After successful sign-up, navigate to the sign-in page
+
+                                      // Get the user and add their info to Firestore
+                                      final user = userCredential.user;
+                                      await FirebaseFirestore.instance.collection("Users").doc(user!.uid).set({
+                                        'email': email,
+                                        'FullName': _fullNameController.text,
+                                        'Level' :'high',
+                                      });
+
+                                      // Send verification email
+                                      await user.sendEmailVerification();
+
+                                      // Navigate to the verification page
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -156,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       );
                                     } on FirebaseAuthException catch (e) {
-                                      // Handle errors here (e.g., email already in use, weak password)
+                                      // Handle errors
                                       showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(

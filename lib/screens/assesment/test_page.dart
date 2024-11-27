@@ -76,6 +76,12 @@ class _TestPageState extends State<TestPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Test Your Knowledge'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Handle back press
+          },
+        ),
         backgroundColor: const Color(0xFF1F2C46),
       ),
       body: Padding(

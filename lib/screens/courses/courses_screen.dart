@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login_signup/screens/courses/video_screen.dart';
 
 class GraphicDesignScreen extends StatelessWidget {
@@ -44,121 +45,93 @@ class GraphicDesignScreen extends StatelessWidget {
   }
 
   Widget _buildFeaturedCourses(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          _buildCourseCard(
-            context: context,
-            youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // YouTube URL
-            title: 'Advance Diploma in Graphic Design',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
-                ),
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('Videos').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Text('No videos found');
+        }
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: snapshot.data!.docs.map((doc) {
+              Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+              String title = data['title'] ?? 'No Title';
+              String youtubeUrl = data['youtubeUrl'] ?? '';
+              double rating = data.containsKey('rating') ? data['rating'].toDouble() : 0.0;
+
+              return _buildCourseCard(
+                context: context,
+                youtubeUrl: youtubeUrl,
+                title: title,
+                rating: rating,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VideoScreen(youtubeUrl: youtubeUrl),
+                    ),
+                  );
+                },
               );
-            },
-            rating: 5.0,
+            }).toList(),
           ),
-          SizedBox(width: 10),
-          _buildCourseCard(
-            context: context,
-            youtubeUrl: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ', // YouTube URL
-            title: 'Certificate in Graphic Design',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
-                ),
-              );
-            },
-            rating: 5.0,
-          ),
-          SizedBox(width: 10),
-          _buildCourseCard(
-            context: context,
-            youtubeUrl: 'https://www.youtube.com/watch?v=2Vv-BfVoq4g', // YouTube URL
-            title: 'Certificate in Graphic Design',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VideoScreen(youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
-                ),
-              );
-            },
-            rating: 5.0,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-
   Widget _buildAllCourses(BuildContext context) {
-    return Column(
-      children: [
-        _buildCourseItem(
-          context: context,
-          imageUrl: 'https://via.placeholder.com/150',
-          title: 'Advance Diploma in Graphic Design',
-          rating: 5.0,
-          lessons: '15 Lessons',
-          duration: '30 Hrs',
-        ),
-        SizedBox(height: 16),
-        _buildCourseItem(
-          context: context,
-          imageUrl: 'https://via.placeholder.com/150',
-          title: 'Certificate in Graphic Design',
-          rating: 5.0,
-          lessons: '15 Lessons',
-          duration: '30 Hrs',
-        ),
-        SizedBox(height: 16),
-        _buildCourseItem(
-          context: context,
-          imageUrl: 'https://via.placeholder.com/150',
-          title: 'Graduate Diploma Program in Graphic Design',
-          rating: 5.0,
-          lessons: '15 Lessons',
-          duration: '30 Hrs',
-        ),
-        SizedBox(height: 16),
-        _buildCourseItem(
-          context: context,
-          imageUrl: 'https://via.placeholder.com/150',
-          title: 'Graduate Diploma Program in Graphic Design',
-          rating: 5.0,
-          lessons: '15 Lessons',
-          duration: '30 Hrs',
-        ),
-      ],
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('Videos').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return Text('No videos found');
+        }
+
+        return Column(
+          children: snapshot.data!.docs.map((doc) {
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+            String title = data['title'] ?? 'No Title';
+            String youtubeUrl = data['youtubeUrl'] ?? '';
+            double rating = data.containsKey('rating') ? data['rating'].toDouble() : 0.0;
+
+            return _buildCourseItem(
+              context: context,
+              imageUrl: 'https://img.youtube.com/vi/${Uri.parse(youtubeUrl).pathSegments.last}/0.jpg',
+              title: title,
+              rating: rating,
+              lessons: '15 Lessons',
+              duration: '30 Hrs',
+            );
+          }).toList(),
+        );
+      },
     );
   }
 
   Widget _buildCourseCard({
     required BuildContext context,
-    required String youtubeUrl, // Add the YouTube URL
+    required String youtubeUrl,
     required String title,
     required double rating,
     required VoidCallback onTap,
   }) {
-    // Function to extract the YouTube thumbnail URL from the YouTube link
     String getYoutubeThumbnail(String youtubeUrl) {
-      // Extract the video ID from the YouTube URL
       final Uri uri = Uri.parse(youtubeUrl);
       String videoId = uri.queryParameters['v'] ?? uri.pathSegments.last;
-
-      // Return the thumbnail URL
       return 'https://img.youtube.com/vi/$videoId/0.jpg';
     }
 
     return GestureDetector(
-      onTap: onTap, // Ensure onTap is connected
+      onTap: onTap,
       child: Container(
         width: 200,
         child: Card(
@@ -209,7 +182,6 @@ class GraphicDesignScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildCourseItem({
     required BuildContext context,

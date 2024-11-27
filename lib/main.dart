@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:login_signup/controllers/courses_controller.dart';
 import 'package:login_signup/screens/welcome_screen.dart';
 
 // Adjust the import path as necessary
@@ -9,7 +7,6 @@ import 'package:login_signup/screens/welcome_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  Get.put(CoursesController());
   runApp(const MyApp());
 }
 

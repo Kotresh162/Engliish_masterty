@@ -35,8 +35,13 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
       appBar: AppBar(
         title: const Text('English Grammar'),
         backgroundColor: Colors.orange,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Handle back press
+          },
+        ),
       ),
-      drawer: const Drawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -14,7 +14,7 @@ class VerifyEmailView extends StatelessWidget {
       body: Column(
         children: [
           const Text('please verify email sent to ur mail'),
-          const Text('if you dont get conformation mail press below button'),
+          const Text("if you didn't get conformation mail press below button"),
           TextButton(
             onPressed: () async {
               final user = FirebaseAuth.instance.currentUser;

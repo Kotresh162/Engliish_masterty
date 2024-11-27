@@ -16,6 +16,12 @@ class _GrammarHomePageState extends State<GrammarHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('English Grammar', style: TextStyle(color: Colors.white)),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Handle back press
+          },
+        ),
         backgroundColor: const Color(0xFF0D1B2A),
         iconTheme: const IconThemeData(color: Colors.white),
       ),

@@ -95,6 +95,12 @@ class _LanguageTranslatingPageState extends State<LanguageTranslatingPage> {
           'Language Translator',
           style: TextStyle(color: Colors.white),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,color: Colors.white,),
+          onPressed: () {
+            Navigator.pop(context); // Handle back press
+          },
+        ),
         centerTitle: true,
         backgroundColor: const Color(0xff10223d),
         elevation: 0,

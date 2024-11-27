@@ -11,7 +11,6 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Unfocus the text field when tapping outside
         FocusScope.of(context).unfocus();
       },
       child: CustomScaffold(
@@ -77,7 +76,7 @@ class DashboardScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GrammarHomePage(),
+                                builder: (context) => const GrammarHomePage(),
                               ),
                             );
                           },
@@ -150,8 +149,18 @@ class DashboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isNavigating = false; // Tracks if navigation is in progress
+
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        if (!isNavigating) {
+          isNavigating = true; // Lock navigation
+          onTap();
+          Future.delayed(const Duration(milliseconds: 300), () {
+            isNavigating = false; // Unlock navigation after delay
+          });
+        }
+      },
       child: Column(
         children: [
           CircleAvatar(
@@ -194,7 +203,7 @@ class ProgressCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
             image: const DecorationImage(
-              image: AssetImage('assets/images/progress_bg.png'),
+              image: AssetImage('assets/images/progress_bg.jpg'),
               fit: BoxFit.cover,
             ),
           ),

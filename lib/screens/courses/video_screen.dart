@@ -37,7 +37,13 @@ class _VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('YouTube Video in Flutter'),
+        title: const Text('Video'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Handle back press
+          },
+        ),
       ),
       body: YoutubePlayer(
         controller: _controller,
