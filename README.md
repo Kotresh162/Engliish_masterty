@@ -1,4 +1,4 @@
-# login_signup
+# Trial App for the English Mastery learning Gen ai app
 
 A new Flutter project.
 
